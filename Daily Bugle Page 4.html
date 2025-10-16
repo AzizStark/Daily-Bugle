@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Bugle - Page 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f1e8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        .newspaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        /* Header Section */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .newspaper-title-small {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        .page-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .page-date {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: right;
+        }
+
+        /* Section Headers */
+        .section-header {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 30px 0 20px 0;
+            border-left: 5px solid #666;
+        }
+
+        /* Two Column Layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Three Column Layout */
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .column {
+            border-right: 1px solid #ddd;
+            padding-right: 25px;
+        }
+
+        .column:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        /* Article Styles */
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-headline {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .article-headline-large {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .article-byline {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .article-text::first-letter {
+            font-size: 42px;
+            font-weight: bold;
+            float: left;
+            line-height: 36px;
+            padding-right: 6px;
+            margin-top: 3px;
+        }
+
+        /* Image Styles */
+        .article-image {
+            width: 100%;
+            margin: 15px 0;
+            border: 2px solid #000;
+            padding: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .image-caption {
+            font-size: 10px;
+            font-style: italic;
+            margin-top: 6px;
+            text-align: center;
+            color: #444;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            border: 3px double #000;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .quote-box blockquote {
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .quote-box cite {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            font-size: 12px;
+            line-height: 1.8;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .info-box li:before {
+            content: "■";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Weather Box */
+        .weather-box {
+            background-color: #f0f0f0;
+            border: 3px solid #000;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .weather-box h4 {
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .weather-today {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .weather-description {
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .weather-detail-item {
+            font-size: 12px;
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid #000;
+        }
+
+        .weather-forecast {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .forecast-day {
+            background-color: #fff;
+            border: 2px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .forecast-day strong {
+            display: block;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .forecast-day .temp {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .forecast-day .condition {
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Statistics Box */
+        .stats-box {
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .stats-box h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .stat-item {
+            margin: 10px 0;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 3px solid #000;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .two-columns,
+            .three-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .column {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+            }
+
+            .column:last-child {
+                border-bottom: none;
+            }
+
+            .newspaper-title-small {
+                font-size: 24px;
+            }
+
+            .page-number {
+                font-size: 32px;
+            }
+
+            .weather-forecast {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div>
+                <h1 class="newspaper-title-small">The Daily Bugle</h1>
+                <p class="page-date">Wednesday, January 8, 2025</p>
+            </div>
+            <div class="page-number">4</div>
+        </header>
+
+        <!-- Sports Section -->
+        <div class="section-header">SPORTS</div>
+
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h2 class="article-headline-large">Yankees Sign Star Pitcher</h2>
+                    <p class="article-byline">By Sports Desk</p>
+                    <p class="article-text">
+                        The New York Yankees made a blockbuster move yesterday, signing All-Star 
+                        pitcher Marcus Rodriguez to a five-year, $125 million contract. The deal, 
+                        announced at a packed press conference at Yankee Stadium, signals the 
+                        franchise's commitment to reclaiming championship glory.
+                    </p>
+                    <p class="article-text">
+                        "This is a game-changer for us," said Yankees General Manager Brian Cashman. 
+                        "Marcus brings elite talent, leadership, and a winning mentality that will 
+                        elevate our entire pitching staff."
+                    </p>
+                    <p class="article-text">
+                        Rodriguez, 28, posted a 2.45 ERA last season with 245 strikeouts. The 
+                        three-time All-Star expressed excitement about joining the storied franchise. 
+                        "Growing up, I dreamed of wearing pinstripes," Rodriguez said. "This is 
+                        where legends are made, and I'm ready to contribute to that legacy."
+                    </p>
+                    <p class="article-text">
+                        The signing addresses the Yankees' most pressing need heading into spring 
+                        training. Fans have already begun lining up for tickets, with season pass 
+                        renewals up 30% since the announcement.
+                    </p>
+                </article>
+
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=800" alt="Baseball stadium">
+                    <p class="image-caption">Yankee Stadium prepares for another exciting season. File photo.</p>
+                </div>
+
+                <article class="article">
+                    <h3 class="article-headline">Knicks Edge Out Celtics in OT Thriller</h3>
+                    <p class="article-byline">By Marcus Williams, Basketball Reporter</p>
+                    <p class="article-text">
+                        The New York Knicks defeated the Boston Celtics 118-115 in overtime last 
+                        night at Madison Square Garden in what many are calling the game of the 
+                        season. Forward James Mitchell scored 38 points, including the game-winning 
+                        three-pointer with 8 seconds remaining.
+                    </p>
+                    <p class="article-text">
+                        "This is why you play in New York," Mitchell said after the game. "The 
+                        energy, the fans, the history—it all came together tonight." The victory 
+                        moves the Knicks to 32-18 on the season, solidifying their playoff position.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <div class="stats-box">
+                    <h4>Last Night's Scores</h4>
+                    <div class="stat-item">
+                        <span class="stat-label">NBA</span>
+                        <span class="stat-number">Knicks 118</span>
+                        <span class="stat-label">Celtics 115 (OT)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">NHL</span>
+                        <span class="stat-number">Rangers 4</span>
+                        <span class="stat-label">Devils 2</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">College Hoops</span>
+                        <span class="stat-number">Syracuse 87</span>
+                        <span class="stat-label">Georgetown 79</span>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Upcoming Games</h4>
+                    <ul>
+                        <li>THU: Knicks vs. Lakers, 7:30 PM</li>
+                        <li>FRI: Rangers vs. Bruins, 8:00 PM</li>
+                        <li>SAT: Nets vs. Heat, 7:00 PM</li>
+                        <li>SUN: Giants vs. Eagles, 1:00 PM</li>
+                        <li>MON: Islanders vs. Penguins, 7:30 PM</li>
+                    </ul>
+                </div>
+
+                <div class="quote-box">
+                    <blockquote>
+                        "This is why you play in New York. The energy, the fans, the history—it 
+                        all came together tonight."
+                    </blockquote>
+                    <cite>— James Mitchell, Knicks Forward</cite>
+                </div>
+
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a?w=600" alt="Basketball game">
+                    <p class="image-caption">Madison Square Garden erupts after Mitchell's game-winner.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Sports -->
+        <div class="three-columns">
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Rangers Dominate Devils</h3>
+                    <p class="article-byline">By Hockey Correspondent</p>
+                    <p class="article-text">
+                        The New York Rangers defeated their cross-river rivals, the New Jersey 
+                        Devils, 4-2 at MSG. Henrik Lundqvist made 32 saves in another stellar 
+                        performance. "The King" continues to prove why he's one of the NHL's elite.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Marathon Training Begins</h3>
+                    <p class="article-byline">By Running Desk</p>
+                    <p class="article-text">
+                        Registration for the New York City Marathon has opened, with over 50,000 
+                        runners expected. Training programs begin this week. The race is scheduled 
+                        for November 3rd, promising another spectacular event through the five boroughs.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">US Open Preview</h3>
+                    <p class="article-byline">By Tennis Reporter</p>
+                    <p class="article-text">
+                        The US Open announces record prize money for this year's tournament. 
+                        Defending champions prepare to return to Flushing Meadows. Ticket sales 
+                        are already breaking records with six months still to go.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- Weather Section -->
+        <div class="section-header">WEATHER</div>
+
+        <div class="weather-box">
+            <h4>Today's Weather in New York City</h4>
+            <div class="weather-today">52°F</div>
+            <div class="weather-description">Partly Cloudy</div>
+            
+            <div class="weather-details">
+                <div class="weather-detail-item">
+                    <strong>High:</strong> 56°F
+                </div>
+                <div class="weather-detail-item">
+                    <strong>Low:</strong> 45°F
+                </div>
+                <div class="weather-detail-item">
+                    <strong>Humidity:</strong> 62%
+                </div>
+                <div class="weather-detail-item">
+                    <strong>Wind:</strong> NW 12 mph
+                </div>
+                <div class="weather-detail-item">
+                    <strong>Sunrise:</strong> 7:15 AM
+                </div>
+                <div class="weather-detail-item">
+                    <strong>Sunset:</strong> 5:45 PM
+                </div>
+                <div class="weather-detail-item">
+                    <strong>UV Index:</strong> Moderate
+                </div>
+                <div class="weather-detail-item">
+                    <strong>Visibility:</strong> 10 miles
+                </div>
+            </div>
+
+            <h4 style="margin-top: 25px; margin-bottom: 15px;">5-Day Forecast</h4>
+            <div class="weather-forecast">
+                <div class="forecast-day">
+                    <strong>Thursday</strong>
+                    <div class="temp">58°F</div>
+                    <div class="condition">Sunny</div>
+                </div>
+                <div class="forecast-day">
+                    <strong>Friday</strong>
+                    <div class="temp">54°F</div>
+                    <div class="condition">Cloudy</div>
+                </div>
+                <div class="forecast-day">
+                    <strong>Saturday</strong>
+                    <div class="temp">49°F</div>
+                    <div class="condition">Rain</div>
+                </div>
+                <div class="forecast-day">
+                    <strong>Sunday</strong>
+                    <div class="temp">51°F</div>
+                    <div class="condition">Partly Cloudy</div>
+                </div>
+                <div class="forecast-day">
+                    <strong>Monday</strong>
+                    <div class="temp">55°F</div>
+                    <div class="condition">Sunny</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Weather Info -->
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h3 class="article-headline">Weekend Weather Outlook</h3>
+                    <p class="article-byline">By Meteorology Department</p>
+                    <p class="article-text">
+                        New Yorkers should prepare for a mix of conditions this weekend. Saturday 
+                        brings a 70% chance of rain, with precipitation expected to begin around 
+                        noon and continue through the evening. Accumulations of 0.5 to 1 inch are 
+                        possible.
+                    </p>
+                    <p class="article-text">
+                        Sunday looks more promising, with clouds clearing by afternoon and 
+                        temperatures reaching the low 50s. It's a perfect day for outdoor activities 
+                        in Central Park or along the waterfront.
+                    </p>
+                    <p class="article-text">
+                        Looking ahead to next week, a warming trend is expected with temperatures 
+                        climbing into the low 60s by Wednesday. Spring weather is finally arriving 
+                        in the city, though residents should keep umbrellas handy as scattered 
+                        showers remain in the forecast.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <div class="info-box">
+                    <h4>Weather Alerts</h4>
+                    <ul>
+                        <li>No active weather warnings</li>
+                        <li>Air quality: Good</li>
+                        <li>Pollen count: Moderate</li>
+                        <li>Beach conditions: Not recommended</li>
+                        <li>Traffic: Normal conditions</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Historical Weather</h4>
+                    <ul>
+                        <li>Record High: 68°F (1975)</li>
+                        <li>Record Low: 12°F (1968)</li>
+                        <li>Average High: 54°F</li>
+                        <li>Average Low: 42°F</li>
+                        <li>Precipitation YTD: 2.4 inches</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>THE DAILY BUGLE • PAGE 4 • WEDNESDAY, JANUARY 8, 2025</p>
+            <p style="margin-top: 5px;">For advertising inquiries: advertising@dailybugle.com | Newsroom: 555-BUGLE</p>
+            <p style="margin-top: 10px; font-weight: bold;">THANK YOU FOR READING THE DAILY BUGLE</p>
+        </footer>
+    </div>
+</body>
+</html>

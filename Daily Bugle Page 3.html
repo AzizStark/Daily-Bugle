@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Bugle - Page 3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f1e8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        .newspaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        /* Header Section */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .newspaper-title-small {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        .page-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .page-date {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: right;
+        }
+
+        /* Section Headers */
+        .section-header {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 30px 0 20px 0;
+            border-left: 5px solid #c00;
+        }
+
+        /* Two Column Layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Three Column Layout */
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .column {
+            border-right: 1px solid #ddd;
+            padding-right: 25px;
+        }
+
+        .column:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        /* Article Styles */
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-headline {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .article-headline-large {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .article-byline {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .article-text::first-letter {
+            font-size: 42px;
+            font-weight: bold;
+            float: left;
+            line-height: 36px;
+            padding-right: 6px;
+            margin-top: 3px;
+        }
+
+        /* Image Styles */
+        .article-image {
+            width: 100%;
+            margin: 15px 0;
+            border: 2px solid #000;
+            padding: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .image-caption {
+            font-size: 10px;
+            font-style: italic;
+            margin-top: 6px;
+            text-align: center;
+            color: #444;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            border: 3px double #000;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .quote-box blockquote {
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .quote-box cite {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            font-size: 12px;
+            line-height: 1.8;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .info-box li:before {
+            content: "■";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Classified Ads */
+        .classifieds {
+            background-color: #f9f9f9;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .classifieds h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .classified-ad {
+            font-size: 11px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .classified-ad:last-child {
+            border-bottom: none;
+        }
+
+        .classified-ad strong {
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* Opinion Box */
+        .opinion-box {
+            border-left: 5px solid #000;
+            padding-left: 15px;
+            margin: 20px 0;
+            background-color: #fafafa;
+            padding: 15px;
+        }
+
+        .opinion-box h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .opinion-box p {
+            font-size: 13px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Statistics Box */
+        .stats-box {
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .stats-box h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            color: #ffd700;
+        }
+
+        .stat-item {
+            margin: 10px 0;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            display: block;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 3px solid #000;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .two-columns,
+            .three-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .column {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+            }
+
+            .column:last-child {
+                border-bottom: none;
+            }
+
+            .newspaper-title-small {
+                font-size: 24px;
+            }
+
+            .page-number {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div>
+                <h1 class="newspaper-title-small">The Daily Bugle</h1>
+                <p class="page-date">Wednesday, January 8, 2025</p>
+            </div>
+            <div class="page-number">3</div>
+        </header>
+
+        <!-- Entertainment & Oddities Section -->
+        <div class="section-header">ENTERTAINMENT & ODDITIES</div>
+
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h2 class="article-headline-large">Alligator Found in Central Park!</h2>
+                    <p class="article-byline">By Gloria Grant, Lifestyle Editor</p>
+                    <p class="article-text">
+                        In what officials are calling "the most New York thing ever," a four-foot 
+                        alligator was discovered sunbathing near the Turtle Pond in Central Park 
+                        yesterday afternoon. The reptile, which joggers initially mistook for a 
+                        large piece of driftwood, caused quite a stir when it yawned.
+                    </p>
+                    <p class="article-text">
+                        "I was just doing my morning run when I saw what I thought was a log," said 
+                        witness Marcus Thompson. "Then it MOVED. I've never run faster in my life!"
+                    </p>
+                    <p class="article-text">
+                        Park Rangers successfully captured the alligator using chicken drumsticks 
+                        and a net. The reptile, affectionately dubbed "Gator Jameson" by social 
+                        media users (in reference to our esteemed editor's tenacity), is believed 
+                        to be a former pet that was illegally released.
+                    </p>
+                    <p class="article-text">
+                        "This is actually more common than people think," explained Wildlife Expert 
+                        Dr. Sarah Martinez. "People buy baby alligators, realize they grow quite 
+                        large, and then make poor decisions."
+                    </p>
+                    <p class="article-text">
+                        Gator Jameson is now residing at the Bronx Zoo and is reportedly doing well, 
+                        enjoying a diet of fish and basking under heat lamps. The zoo is considering 
+                        making him an educational ambassador about the dangers of exotic pet ownership.
+                    </p>
+                </article>
+
+                <div class="opinion-box">
+                    <h4>Editor's Note</h4>
+                    <p>
+                        J. Jonah Jameson is NOT amused by the "Gator Jameson" nickname. The alligator 
+                        shows more restraint than certain masked vigilantes, we'll give him that.
+                    </p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="info-box">
+                    <h4>🌟 Weird NYC Facts</h4>
+                    <ul>
+                        <li>Empire State Building has its own zip code: 10118</li>
+                        <li>Over 800 languages spoken in NYC</li>
+                        <li>Secret train platform beneath Waldorf Astoria</li>
+                        <li>Federal Reserve has more gold than Fort Knox</li>
+                        <li>City's colors are blue, white, and orange</li>
+                    </ul>
+                </div>
+
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600" alt="Alligator">
+                    <p class="image-caption">"Gator Jameson" before capture. Photo courtesy Bronx Zoo.</p>
+                </div>
+
+                <div class="quote-box">
+                    <blockquote>
+                        "That bagel was bigger than the squirrel!"
+                    </blockquote>
+                    <cite>— Tourist Emma Williams on Bagel Squirrel</cite>
+                </div>
+            </div>
+        </div>
+
+        <!-- Viral Sensations Section -->
+        <div class="section-header">VIRAL SENSATIONS</div>
+
+        <div class="three-columns">
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Pizza Rat Has Competition!</h3>
+                    <p class="article-byline">By Betty Brant</p>
+                    <p class="article-text">
+                        Move over, Pizza Rat! A new viral sensation has taken New York by storm: 
+                        Bagel Squirrel. The ambitious rodent was filmed dragging an entire everything 
+                        bagel up a tree in Prospect Park.
+                    </p>
+                    <p class="article-text">
+                        The 30-second video has garnered 5 million views. Debate has erupted online 
+                        about whether Bagel Squirrel or Pizza Rat deserves the title of "Most New 
+                        York Animal."
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Flash Mob Proposal</h3>
+                    <p class="article-byline">By Ned Leeds</p>
+                    <p class="article-text">
+                        Times Square witnessed an elaborate marriage proposal when software engineer 
+                        David Park orchestrated a 50-person flash mob to "Marry You" by Bruno Mars. 
+                        She said yes!
+                    </p>
+                    <p class="article-text">
+                        The performance brought traffic to a standstill for 12 minutes. "Most amazing 
+                        moment of my life," said Sarah Kim.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">The Knitting Bandit</h3>
+                    <p class="article-byline">By Eddie Brock</p>
+                    <p class="article-text">
+                        The mysterious "Knitting Bandit" has wrapped dozens of street poles in 
+                        colorful yarn throughout the Upper West Side. Each piece is signed 
+                        "Stay Warm, NYC ❤️"
+                    </p>
+                    <p class="article-text">
+                        Social media rallies behind the bandit with #KeepNYCCozy trending. One 
+                        resident started a petition for a pardon.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- Lifestyle Section -->
+        <div class="section-header">LIFESTYLE & DINING</div>
+
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h3 class="article-headline-large">Restaurant Review: The Invisible Café</h3>
+                    <p class="article-byline">By Gloria Grant, Food Critic</p>
+                    <p class="article-text">
+                        The Invisible Café in SoHo offers a truly unique dining experience: eating 
+                        in complete darkness, served by visually impaired staff. ★★★★☆ (4/5 Stars)
+                    </p>
+                    <p class="article-text">
+                        The concept challenges diners to rely on their other senses. My mystery 
+                        three-course meal was delightful, though I still don't know what I ate 
+                        in the second course.
+                    </p>
+                    <p class="article-text">
+                        "It's about empathy and awareness," explained owner Michael Chen. "And 
+                        also about appreciating food in a completely new way."
+                    </p>
+                    <p class="article-text">
+                        Pro tip: Don't wear white. Trust me.
+                    </p>
+                    <p style="font-size: 12px; margin-top: 10px; border-top: 1px solid #ccc; padding-top: 10px;">
+                        <strong>Location:</strong> 47 Spring Street, SoHo<br>
+                        <strong>Price Range:</strong> $$$<br>
+                        <strong>Reservations:</strong> Essential (Book 2 weeks ahead)<br>
+                        <strong>Hours:</strong> Tue-Sun, 6pm-11pm
+                    </p>
+                </article>
+
+                <article class="article">
+                    <h3 class="article-headline">Cat Café Opens in Brooklyn</h3>
+                    <p class="article-byline">By Betty Brant</p>
+                    <p class="article-text">
+                        Brooklyn's "Purrfect Grounds" combines two of the internet's favorite things: 
+                        cats and coffee. The café houses 15 adoptable cats from local shelters.
+                    </p>
+                    <p class="article-text">
+                        Since opening two weeks ago, five cats have been adopted. The café's most 
+                        popular resident, orange tabby "Cheeto," has his own Instagram with 50,000 
+                        followers. Entry is $15 per hour, includes a beverage.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <div class="classifieds">
+                    <h4>CLASSIFIED ADVERTISEMENTS</h4>
+                    
+                    <div class="classified-ad">
+                        <strong>HELP WANTED</strong>
+                        Photographer needed for action shots. Must be willing to climb buildings. 
+                        Daily Bugle. Ask for J. Jonah Jameson. (212) 555-PICS
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>FOR SALE</strong>
+                        Spider webbing removal service. Professional cleaning of mysterious sticky 
+                        substances from buildings. No questions asked. (212) 555-CLEAN
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>SERVICES</strong>
+                        Psychic Readings by Madame Zelda. Find out if that masked hero is really 
+                        a menace. $20/session. Walk-ins welcome!
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>ROOMMATE WANTED</strong>
+                        Queens apartment. Seeking quiet roommate. Must be okay with occasional 
+                        strange noises at night. $800/mo + utilities. (718) 555-ROOM
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>LOST & FOUND</strong>
+                        FOUND: Red and blue fabric near Brooklyn Bridge. Appears to be costume 
+                        material. Claim at NYPD 84th Precinct.
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>PERSONALS</strong>
+                        To the person in the red suit: Thanks for saving my cat from that tree 
+                        last week. You're a hero! — Grateful in Greenwich Village
+                    </div>
+                </div>
+
+                <div class="stats-box">
+                    <h4>🔮 Daily Horoscope</h4>
+                    <div class="stat-item">
+                        <span class="stat-label" style="display: block; margin-bottom: 8px;">
+                            <strong>ARIES:</strong> A masked figure may cross your path. Avoid falling pianos.
+                        </span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label" style="display: block; margin-bottom: 8px;">
+                            <strong>GEMINI:</strong> Watch out for pigeons - they're plotting something.
+                        </span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label" style="display: block; margin-bottom: 8px;">
+                            <strong>LEO:</strong> Perfect time for that karaoke debut!
+                        </span>
+                    </div>
+                    <p style="font-size: 9px; margin-top: 10px; font-style: italic;">By Madame Zelda, Mystical Advisor</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>🧩 Daily Puzzle</h4>
+                    <p style="text-align: center; font-weight: bold; margin: 10px 0; font-size: 13px;">
+                        "Masked vigilante or public menace?"
+                    </p>
+                    <p style="text-align: center; font-size: 13px;">(9 letters)</p>
+                    <p style="text-align: center; font-size: 9px; font-style: italic; margin-top: 10px;">
+                        Answer: <span style="display: inline-block; transform: rotate(180deg);">SPIDERMAN</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>THE DAILY BUGLE • PAGE 3 • WEDNESDAY, JANUARY 8, 2025</p>
+            <p style="margin-top: 5px;">For advertising inquiries: advertising@dailybugle.com | Newsroom: 555-BUGLE</p>
+        </footer>
+    </div>
+</body>
+</html>

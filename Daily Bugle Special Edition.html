@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Bugle - SPECIAL EDITION</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f1e8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        .newspaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        /* Header Section */
+        .newspaper-header {
+            text-align: center;
+            border-bottom: 4px solid #000;
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+        }
+
+        .header-top {
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .special-edition-banner {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin: 10px 0;
+            border: 3px solid #000;
+        }
+
+        .newspaper-title {
+            font-family: 'Georgia', serif;
+            font-size: 72px;
+            font-weight: bold;
+            letter-spacing: -2px;
+            margin: 10px 0;
+            text-transform: uppercase;
+            color: #000;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .newspaper-tagline {
+            font-size: 12px;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            color: #333;
+        }
+
+        .newspaper-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            padding: 8px 0;
+            border-bottom: 1px solid #000;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Headline */
+        .main-headline {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px 0;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+        }
+
+        .main-headline h1 {
+            font-size: 56px;
+            font-weight: bold;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .main-headline .subheadline {
+            font-size: 24px;
+            font-style: italic;
+            color: #444;
+            margin-top: 10px;
+        }
+
+        /* Column Layout */
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .column {
+            border-right: 1px solid #ddd;
+            padding-right: 30px;
+        }
+
+        .column:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        .article {
+            margin-bottom: 30px;
+        }
+
+        .article-headline {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .article-byline {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .article-text::first-letter {
+            font-size: 48px;
+            font-weight: bold;
+            float: left;
+            line-height: 40px;
+            padding-right: 8px;
+            margin-top: 3px;
+        }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            border: 3px solid #000;
+            margin: 20px 0;
+            background-color: #e0e0e0;
+            padding: 10px;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #999;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .image-caption {
+            font-size: 11px;
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+            color: #444;
+        }
+
+        /* Breaking News Box */
+        .breaking-news {
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            margin: 20px 0;
+            border: 3px solid #000;
+        }
+
+        .breaking-news h3 {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .breaking-news p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Advertisement Box */
+        .advertisement {
+            border: 2px solid #000;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+        }
+
+        .advertisement h4 {
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .advertisement p {
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        /* Eyewitness Box */
+        .eyewitness-box {
+            border: 3px double #000;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+        }
+
+        .eyewitness-box h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .eyewitness-box p {
+            font-size: 13px;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .eyewitness-box cite {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: bold;
+            display: block;
+            text-align: right;
+        }
+
+        /* Footer */
+        .newspaper-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 3px solid #000;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .column {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+            }
+
+            .column:last-child {
+                border-bottom: none;
+            }
+
+            .newspaper-title {
+                font-size: 48px;
+            }
+
+            .main-headline h1 {
+                font-size: 36px;
+            }
+        }
+
+        /* Print Styling */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+
+            .newspaper-container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-container">
+        <!-- Header -->
+        <header class="newspaper-header">
+            <div class="header-top">ESTABLISHED 1897 • NEW YORK CITY</div>
+            <div class="special-edition-banner">★ ★ ★ SPECIAL EDITION ★ ★ ★</div>
+            <h1 class="newspaper-title">The Daily Bugle</h1>
+            <p class="newspaper-tagline">"With Great Power Comes Great Responsibility to Report the Truth"</p>
+        </header>
+
+        <!-- Meta Information -->
+        <div class="newspaper-meta">
+            <span>Vol. 127, No. 42,892</span>
+            <span>NEW YORK, THURSDAY, JANUARY 9, 2025</span>
+            <span>SPECIAL EDITION • Price: $2.50</span>
+        </div>
+
+        <!-- Main Headline -->
+        <section class="main-headline">
+            <h1>Oscorp Explosion Rocks Manhattan!</h1>
+            <p class="subheadline">Dozens Injured as Research Lab Destroyed in Mysterious Blast</p>
+        </section>
+
+        <!-- Featured Image -->
+        <div class="featured-image">
+            <img src="https://images.unsplash.com/photo-1525103504173-8dc1582c7430?w=1200" alt="Building explosion aftermath">
+            <p class="image-caption">Smoke billows from Oscorp Tower following last night's explosion. Photo by Eddie Brock.</p>
+        </div>
+
+        <!-- Three Column Layout -->
+        <div class="columns">
+            <!-- Column 1 -->
+            <div class="column">
+                <article class="article">
+                    <h2 class="article-headline">Disaster Strikes at Midnight</h2>
+                    <p class="article-byline">By J. Jonah Jameson & Ben Urich</p>
+                    <p class="article-text">
+                        A massive explosion ripped through Oscorp Industries' research facility 
+                        late last night, sending shockwaves across Manhattan and leaving at least 
+                        47 people injured. The blast, which occurred at approximately 11:47 PM, 
+                        destroyed three floors of the company's headquarters and could be felt 
+                        as far away as Brooklyn.
+                    </p>
+                    <p class="article-text">
+                        Emergency services rushed to the scene as flames engulfed the 45th through 
+                        47th floors of the iconic Oscorp Tower. Firefighters battled the blaze for 
+                        over four hours before bringing it under control. The building has been 
+                        evacuated and declared structurally unstable.
+                    </p>
+                    <p class="article-text">
+                        "It sounded like thunder," said nearby resident Maria Gonzalez. "My windows 
+                        shattered, and I saw this huge fireball shooting out of the building. I've 
+                        never seen anything like it."
+                    </p>
+                    <p class="article-text">
+                        FDNY Commissioner Thomas Riley confirmed that 47 people were transported 
+                        to area hospitals with injuries ranging from minor cuts to severe burns. 
+                        Miraculously, no fatalities have been reported, though three individuals 
+                        remain in critical condition at New York Presbyterian Hospital.
+                    </p>
+                </article>
+
+                <div class="eyewitness-box">
+                    <h4>Eyewitness Accounts</h4>
+                    <p>"The entire building shook. Papers flew everywhere. We ran for the stairs 
+                    and didn't look back."</p>
+                    <cite>— Sarah Chen, Oscorp Employee</cite>
+                    
+                    <p style="margin-top: 10px;">"I saw people running out covered in debris. 
+                    Some were helping others who couldn't walk. It was chaos."</p>
+                    <cite>— Marcus Thompson, Security Guard</cite>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="column">
+                <article class="article">
+                    <h2 class="article-headline">Questions Mount Over Cause</h2>
+                    <p class="article-byline">By Frederick Foswell</p>
+                    <p class="article-text">
+                        While officials have not yet determined the cause of the explosion, sources 
+                        close to the investigation suggest it originated in Oscorp's controversial 
+                        genetic research division. The company has faced scrutiny in recent months 
+                        over safety protocols in its experimental laboratories.
+                    </p>
+                    <p class="article-text">
+                        CEO Norman Osborn, who was not in the building at the time of the blast, 
+                        released a statement early this morning: "We are devastated by this tragedy. 
+                        Our thoughts are with the injured and their families. We are cooperating 
+                        fully with investigators to determine what happened."
+                    </p>
+                    <p class="article-text">
+                        However, critics are demanding answers. City Councilwoman Patricia Hayes 
+                        has called for an immediate investigation into Oscorp's safety record. 
+                        "This company has been operating with minimal oversight for too long," 
+                        Hayes stated. "The people of New York deserve to know what dangerous 
+                        experiments were being conducted in the heart of our city."
+                    </p>
+                </article>
+
+                <div class="breaking-news">
+                    <h3>⚡ Latest Updates</h3>
+                    <p>
+                        <strong>6:00 AM:</strong> Three patients upgraded from critical to serious condition.<br>
+                        <strong>5:30 AM:</strong> FBI joins investigation amid questions about lab security.<br>
+                        <strong>4:15 AM:</strong> Evacuation zone expanded to three-block radius.<br>
+                        <strong>3:00 AM:</strong> Fire officially declared under control.
+                    </p>
+                </div>
+
+                <article class="article">
+                    <h2 class="article-headline">Spider-Man on Scene</h2>
+                    <p class="article-byline">By Eddie Brock</p>
+                    <p class="article-text">
+                        Multiple witnesses report that the masked vigilante known as Spider-Man 
+                        was among the first responders at the scene, pulling victims from the 
+                        burning building before firefighters arrived. While some hail his actions 
+                        as heroic, others question what he might have been doing at Oscorp at 
+                        that hour.
+                    </p>
+                    <p class="article-text">
+                        "He was swinging people down from the upper floors," said witness David 
+                        Park. "Without him, I don't think everyone would have made it out."
+                    </p>
+                </article>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="column">
+                <article class="article">
+                    <h2 class="article-headline">City Responds to Crisis</h2>
+                    <p class="article-byline">By Betty Brant</p>
+                    <p class="article-text">
+                        Mayor Wilson declared a state of emergency for the affected area and 
+                        activated the city's disaster response protocols. Several nearby buildings 
+                        remain evacuated as structural engineers assess potential damage from 
+                        the blast.
+                    </p>
+                    <p class="article-text">
+                        "The safety of New Yorkers is our top priority," the Mayor said at a 
+                        4 AM press conference. "We will get to the bottom of what happened here."
+                    </p>
+                    <p class="article-text">
+                        Public transportation has been disrupted, with the nearby subway station 
+                        closed indefinitely. Commuters are advised to seek alternate routes.
+                    </p>
+                </article>
+
+                <div class="advertisement">
+                    <h4>BLOOD DONORS NEEDED</h4>
+                    <p>New York Blood Center urgently needs donations</p>
+                    <p style="margin-top: 10px;">All types needed • Walk-ins welcome</p>
+                    <p>Multiple locations open 24 hours</p>
+                    <p style="margin-top: 10px; font-weight: bold;">Call 1-800-933-BLOOD</p>
+                </div>
+
+                <article class="article">
+                    <h2 class="article-headline">Oscorp's Troubled History</h2>
+                    <p class="article-byline">By Robbie Robertson</p>
+                    <p class="article-text">
+                        This is not the first incident at Oscorp facilities. In 2019, a chemical 
+                        spill resulted in a temporary shutdown of operations. Last year, three 
+                        employees filed safety complaints with OSHA, though the company denied 
+                        any wrongdoing.
+                    </p>
+                    <p class="article-text">
+                        Former employee Dr. Curtis Connors, who left the company in 2023, has 
+                        been vocal about what he calls "reckless experimentation" at Oscorp. 
+                        "I warned them something like this could happen," Connors said in a 
+                        phone interview this morning.
+                    </p>
+                </article>
+
+                <div class="advertisement">
+                    <h4>EMERGENCY HOTLINE</h4>
+                    <p>If you have information about the explosion</p>
+                    <p style="margin-top: 10px; font-weight: bold;">Call: 1-800-TIPS-NYC</p>
+                    <p>All tips confidential</p>
+                </div>
+
+                <article class="article">
+                    <h2 class="article-headline">What Happens Next?</h2>
+                    <p class="article-byline">By Ned Leeds</p>
+                    <p class="article-text">
+                        Federal investigators from the ATF and FBI are expected to arrive today 
+                        to join local authorities in determining the cause of the explosion. The 
+                        investigation could take weeks or even months.
+                    </p>
+                    <p class="article-text">
+                        Oscorp's stock plummeted 35% in pre-market trading, and analysts predict 
+                        the company faces billions in liability claims. Several law firms have 
+                        already announced class-action lawsuits on behalf of victims.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="newspaper-footer">
+            <p>THE DAILY BUGLE • SPECIAL EDITION • 39TH STREET AND 2ND AVENUE, NEW YORK, NY 10016</p>
+            <p>© 2025 The Daily Bugle. All rights reserved. Published daily except Sundays and holidays.</p>
+            <p style="margin-top: 10px;">
+                PUBLISHER: J. Jonah Jameson | EDITOR: Robbie Robertson | CIRCULATION: 500,000+
+            </p>
+            <p style="margin-top: 10px; font-weight: bold;">
+                CONTINUED COVERAGE ON PAGES 2-4 • FULL INVESTIGATION ONGOING
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
