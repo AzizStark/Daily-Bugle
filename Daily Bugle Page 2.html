@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Bugle - Page 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f1e8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        .newspaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        /* Header Section */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .newspaper-title-small {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        .page-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .page-date {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: right;
+        }
+
+        /* Section Headers */
+        .section-header {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 30px 0 20px 0;
+            border-left: 5px solid #c00;
+        }
+
+        /* Two Column Layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Three Column Layout */
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .column {
+            border-right: 1px solid #ddd;
+            padding-right: 25px;
+        }
+
+        .column:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        /* Article Styles */
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-headline {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .article-headline-large {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .article-byline {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .article-text::first-letter {
+            font-size: 42px;
+            font-weight: bold;
+            float: left;
+            line-height: 36px;
+            padding-right: 6px;
+            margin-top: 3px;
+        }
+
+        /* Image Styles */
+        .article-image {
+            width: 100%;
+            margin: 15px 0;
+            border: 2px solid #000;
+            padding: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .image-caption {
+            font-size: 10px;
+            font-style: italic;
+            margin-top: 6px;
+            text-align: center;
+            color: #444;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            border: 3px double #000;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .quote-box blockquote {
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .quote-box cite {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            font-size: 12px;
+            line-height: 1.8;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .info-box li:before {
+            content: "■";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Classified Ads */
+        .classifieds {
+            background-color: #f9f9f9;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .classifieds h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .classified-ad {
+            font-size: 11px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .classified-ad:last-child {
+            border-bottom: none;
+        }
+
+        .classified-ad strong {
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* Opinion Box */
+        .opinion-box {
+            border-left: 5px solid #000;
+            padding-left: 15px;
+            margin: 20px 0;
+            background-color: #fafafa;
+            padding: 15px;
+        }
+
+        .opinion-box h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .opinion-box p {
+            font-size: 13px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Statistics Box */
+        .stats-box {
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .stats-box h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            color: #ffd700;
+        }
+
+        .stat-item {
+            margin: 10px 0;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            display: block;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 3px solid #000;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .two-columns,
+            .three-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .column {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+            }
+
+            .column:last-child {
+                border-bottom: none;
+            }
+
+            .newspaper-title-small {
+                font-size: 24px;
+            }
+
+            .page-number {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div>
+                <h1 class="newspaper-title-small">The Daily Bugle</h1>
+                <p class="page-date">Wednesday, January 8, 2025</p>
+            </div>
+            <div class="page-number">2</div>
+        </header>
+
+        <!-- Metro Section -->
+        <div class="section-header">METRO NEWS</div>
+
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h2 class="article-headline-large">Mysterious Lights Over Queens</h2>
+                    <p class="article-byline">By Frederick Foswell, Metro Reporter</p>
+                    <p class="article-text">
+                        Residents of Queens reported seeing unusual lights in the sky last night around 
+                        11:30 PM. The phenomenon, described as "bright blue streaks" by witnesses, 
+                        lasted approximately fifteen minutes before disappearing without a trace.
+                    </p>
+                    <p class="article-text">
+                        "I was taking out the trash when I saw them," said local resident Maria Gonzalez. 
+                        "At first I thought it was fireworks, but they moved in patterns I've never seen 
+                        before. It was both beautiful and terrifying."
+                    </p>
+                    <p class="article-text">
+                        The NYPD has received over 200 calls about the incident. Officials from the 
+                        FAA confirmed no aircraft were in the area at the time. Dr. Curt Connors from 
+                        Empire State University suggests the lights could be atmospheric phenomena 
+                        related to recent solar activity.
+                    </p>
+                </article>
+
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800" alt="Night sky over city">
+                    <p class="image-caption">The night sky over Queens where witnesses reported mysterious lights. File photo.</p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="stats-box">
+                    <h4>Crime Statistics</h4>
+                    <div class="stat-item">
+                        <span class="stat-number">↓ 12%</span>
+                        <span class="stat-label">Burglaries This Month</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">↑ 8%</span>
+                        <span class="stat-label">Vehicle Thefts</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">247</span>
+                        <span class="stat-label">Arrests Last Week</span>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    <blockquote>
+                        "New York is safer today than it was a decade ago, but we cannot become complacent."
+                    </blockquote>
+                    <cite>— Police Commissioner</cite>
+                </div>
+
+                <div class="info-box">
+                    <h4>This Week in NYC</h4>
+                    <ul>
+                        <li>City Council votes on new budget proposal</li>
+                        <li>Subway fare increase debate continues</li>
+                        <li>Central Park renovation enters Phase 2</li>
+                        <li>New affordable housing units open in Bronx</li>
+                        <li>Manhattan Bridge repairs scheduled</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Section -->
+        <div class="section-header">BUSINESS & FINANCE</div>
+
+        <div class="three-columns">
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Oscorp Stock Surges</h3>
+                    <p class="article-byline">By Financial Desk</p>
+                    <p class="article-text">
+                        Oscorp Industries shares jumped 15% yesterday following announcements of 
+                        breakthrough research in genetic therapy. CEO Norman Osborn called it 
+                        "a new era for medical science."
+                    </p>
+                    <p class="article-text">
+                        Wall Street analysts remain cautiously optimistic about the company's 
+                        long-term prospects despite recent controversies.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Small Business Boom</h3>
+                    <p class="article-byline">By Gloria Grant</p>
+                    <p class="article-text">
+                        New York City has seen a 22% increase in small business applications 
+                        this quarter. Local entrepreneurs credit improved loan programs and 
+                        community support initiatives.
+                    </p>
+                    <p class="article-text">
+                        The trend is particularly strong in Brooklyn and the Bronx, where 
+                        minority-owned businesses are flourishing.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Tech Jobs Growing</h3>
+                    <p class="article-byline">By Lance Bannon</p>
+                    <p class="article-text">
+                        Silicon Alley continues to expand with over 5,000 new tech positions 
+                        created in the past six months. Major companies are establishing 
+                        headquarters in Manhattan.
+                    </p>
+                    <p class="article-text">
+                        Industry experts predict New York could rival Silicon Valley within 
+                        the next decade.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- Opinion Section -->
+        <div class="section-header">OPINION & EDITORIAL</div>
+
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h3 class="article-headline-large">Editor's Note: Accountability Matters</h3>
+                    <p class="article-byline">By J. Jonah Jameson</p>
+                    <p class="article-text">
+                        For too long, this city has turned a blind eye to vigilantes operating 
+                        outside the law. While some may call them heroes, I call them a threat 
+                        to the very foundation of our justice system.
+                    </p>
+                    <p class="article-text">
+                        When masked individuals take the law into their own hands, they undermine 
+                        the police, the courts, and every institution we've built to maintain 
+                        order. Today it's stopping a robbery. Tomorrow? Who decides what's right 
+                        and wrong?
+                    </p>
+                    <p class="article-text">
+                        We have laws for a reason. We have due process for a reason. And we have 
+                        elected officials and trained law enforcement for a reason. No one—no 
+                        matter how powerful or well-intentioned—should be above accountability.
+                    </p>
+                    <p class="article-text">
+                        The Daily Bugle will continue to ask the tough questions and demand 
+                        transparency, even when it's unpopular. That's our duty to you, the 
+                        citizens of New York.
+                    </p>
+                </article>
+
+                <div class="opinion-box">
+                    <h4>Letters to the Editor</h4>
+                    <p>
+                        "I disagree with Mr. Jameson about Spider-Man. Last week that 'menace' 
+                        saved my daughter from a burning building. He's a hero in my book." 
+                        — Patricia M., Brooklyn
+                    </p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="classifieds">
+                    <h4>CLASSIFIED ADVERTISEMENTS</h4>
+                    
+                    <div class="classified-ad">
+                        <strong>HELP WANTED</strong>
+                        Photographer needed for freelance work. Must have own equipment. 
+                        Contact Daily Bugle, ask for Robbie Robertson.
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>APARTMENT FOR RENT</strong>
+                        2BR in Forest Hills, Queens. Quiet neighborhood, near subway. 
+                        $1,800/mo. Call 555-0147.
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>LOST & FOUND</strong>
+                        Lost: Black cat, answers to "Felicia." Last seen near Central Park. 
+                        Reward offered. 555-0198.
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>SERVICES</strong>
+                        Nelson & Murdock, Attorneys at Law. Personal injury, criminal defense. 
+                        Free consultation. Hell's Kitchen. 555-0100.
+                    </div>
+                    
+                    <div class="classified-ad">
+                        <strong>FOR SALE</strong>
+                        Vintage comic book collection. Rare issues from 1960s. 
+                        Serious inquiries only. 555-0176.
+                    </div>
+                </div>
+
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600" alt="New York City skyline">
+                    <p class="image-caption">The city that never sleeps continues to evolve and grow.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>THE DAILY BUGLE • PAGE 2 • WEDNESDAY, JANUARY 8, 2025</p>
+            <p style="margin-top: 5px;">For advertising inquiries: advertising@dailybugle.com | Newsroom: 555-BUGLE</p>
+        </footer>
+    </div>
+</body>
+</html>

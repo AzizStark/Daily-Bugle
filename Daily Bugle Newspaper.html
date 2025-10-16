@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Bugle - New York's Finest News Source</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f1e8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        .newspaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        /* Header Section */
+        .newspaper-header {
+            text-align: center;
+            border-bottom: 4px solid #000;
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+        }
+
+        .header-top {
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .newspaper-title {
+            font-family: 'Georgia', serif;
+            font-size: 72px;
+            font-weight: bold;
+            letter-spacing: -2px;
+            margin: 10px 0;
+            text-transform: uppercase;
+            color: #000;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .newspaper-tagline {
+            font-size: 12px;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            color: #333;
+        }
+
+        .newspaper-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            padding: 8px 0;
+            border-bottom: 1px solid #000;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Headline */
+        .main-headline {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px 0;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+        }
+
+        .main-headline h1 {
+            font-size: 56px;
+            font-weight: bold;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .main-headline .subheadline {
+            font-size: 24px;
+            font-style: italic;
+            color: #444;
+            margin-top: 10px;
+        }
+
+        /* Column Layout */
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .column {
+            border-right: 1px solid #ddd;
+            padding-right: 30px;
+        }
+
+        .column:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        .article {
+            margin-bottom: 30px;
+        }
+
+        .article-headline {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .article-byline {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .article-text::first-letter {
+            font-size: 48px;
+            font-weight: bold;
+            float: left;
+            line-height: 40px;
+            padding-right: 8px;
+            margin-top: 3px;
+        }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            border: 3px solid #000;
+            margin: 20px 0;
+            background-color: #e0e0e0;
+            padding: 10px;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #999;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .image-caption {
+            font-size: 11px;
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+            color: #444;
+        }
+
+        /* Breaking News Box */
+        .breaking-news {
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            margin: 20px 0;
+            border: 3px solid #000;
+        }
+
+        .breaking-news h3 {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #ff0000;
+        }
+
+        .breaking-news p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Advertisement Box */
+        .advertisement {
+            border: 2px solid #000;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+        }
+
+        .advertisement h4 {
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .advertisement p {
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .newspaper-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 3px solid #000;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .column {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+            }
+
+            .column:last-child {
+                border-bottom: none;
+            }
+
+            .newspaper-title {
+                font-size: 48px;
+            }
+
+            .main-headline h1 {
+                font-size: 36px;
+            }
+        }
+
+        /* Print Styling */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+
+            .newspaper-container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-container">
+        <!-- Header -->
+        <header class="newspaper-header">
+            <div class="header-top">ESTABLISHED 1897 • NEW YORK CITY</div>
+            <h1 class="newspaper-title">The Daily Bugle</h1>
+            <p class="newspaper-tagline">"With Great Power Comes Great Responsibility to Report the Truth"</p>
+        </header>
+
+        <!-- Meta Information -->
+        <div class="newspaper-meta">
+            <span>Vol. 127, No. 42,891</span>
+            <span>NEW YORK, WEDNESDAY, JANUARY 8, 2025</span>
+            <span>Price: $2.50</span>
+        </div>
+
+        <!-- Main Headline -->
+        <section class="main-headline">
+            <h1>Spider-Man: Hero or Menace?</h1>
+            <p class="subheadline">Masked Vigilante Continues to Evade Law Enforcement</p>
+        </section>
+
+        <!-- Featured Image -->
+        <div class="featured-image">
+            <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/10/spiderman-2-swing.jpg?q=50&fit=crop&w=825&dpr=1.5" alt="Spider-Man swinging through Manhattan">
+            <p class="image-caption">The web-slinger was spotted near Times Square yesterday evening. Photo by Eddie Brock.</p>
+        </div>
+
+        <!-- Three Column Layout -->
+        <div class="columns">
+            <!-- Column 1 -->
+            <div class="column">
+                <article class="article">
+                    <h2 class="article-headline">Wall-Crawler Strikes Again</h2>
+                    <p class="article-byline">By J. Jonah Jameson, Editor-in-Chief</p>
+                    <p class="article-text">
+                        Once again, the menace known as Spider-Man has taken the law into his own hands. 
+                        Despite repeated warnings from this publication and law enforcement officials, 
+                        the masked vigilante continues to operate with impunity throughout our fair city.
+                    </p>
+                    <p class="article-text">
+                        Yesterday's incident near the Brooklyn Bridge left three vehicles damaged and 
+                        traffic backed up for miles. While some witnesses claim Spider-Man was "helping," 
+                        this reporter knows better. Where there's smoke, there's fire, and where there's 
+                        Spider-Man, there's trouble.
+                    </p>
+                    <p class="article-text">
+                        The NYPD has yet to comment on their continued inability to apprehend this 
+                        wall-crawling criminal. Citizens deserve better protection from costumed menaces 
+                        who think they're above the law.
+                    </p>
+                </article>
+
+                <div class="advertisement">
+                    <h4>OSCORP INDUSTRIES</h4>
+                    <p>Leading the way in scientific innovation</p>
+                    <p style="margin-top: 10px;">Visit us at oscorp.com</p>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="column">
+                <article class="article">
+                    <h2 class="article-headline">Mayor Promises Action on Crime</h2>
+                    <p class="article-byline">By Ben Urich, Senior Reporter</p>
+                    <p class="article-text">
+                        Mayor Wilson announced a comprehensive new initiative to combat rising crime 
+                        rates in Manhattan. The plan includes increased police presence in high-crime 
+                        areas and new technology to track criminal activity.
+                    </p>
+                    <p class="article-text">
+                        "We will not let our city be held hostage by criminals, whether they wear masks 
+                        or not," the Mayor stated at yesterday's press conference. The initiative has 
+                        received mixed reactions from city council members.
+                    </p>
+                </article>
+
+                <div class="breaking-news">
+                    <h3>⚡ Breaking News</h3>
+                    <p>
+                        Bank robbery thwarted in Midtown. Suspects in custody. Full story developing. 
+                        Check dailybugle.com for updates.
+                    </p>
+                </div>
+
+                <article class="article">
+                    <h2 class="article-headline">Stark Industries Announces New Tech</h2>
+                    <p class="article-byline">By Ned Leeds, Technology Correspondent</p>
+                    <p class="article-text">
+                        Tony Stark unveiled the latest innovations from Stark Industries at a press 
+                        event yesterday. The new arc reactor technology promises to revolutionize 
+                        clean energy production worldwide.
+                    </p>
+                </article>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="column">
+                <article class="article">
+                    <h2 class="article-headline">Weather: Sunny Skies Ahead</h2>
+                    <p class="article-byline">By Meteorology Department</p>
+                    <p class="article-text">
+                        New Yorkers can expect clear skies and mild temperatures throughout the week. 
+                        Highs in the mid-60s with light winds. Perfect weather for outdoor activities.
+                    </p>
+                </article>
+
+                <article class="article">
+                    <h2 class="article-headline">Yankees Prepare for Season</h2>
+                    <p class="article-byline">By Sports Desk</p>
+                    <p class="article-text">
+                        Spring training begins next month as the Yankees look to reclaim their 
+                        championship glory. Manager discusses new roster additions and team strategy 
+                        for the upcoming season.
+                    </p>
+                </article>
+
+                <article class="article">
+                    <h2 class="article-headline">Broadway Hit Extends Run</h2>
+                    <p class="article-byline">By Betty Brant, Arts & Culture</p>
+                    <p class="article-text">
+                        The smash musical "Web of Dreams" has extended its Broadway run through 
+                        December due to popular demand. Tickets are selling fast for this 
+                        critically acclaimed production.
+                    </p>
+                </article>
+
+                <div class="advertisement">
+                    <h4>SUBSCRIBE TODAY!</h4>
+                    <p>Get the Daily Bugle delivered to your door</p>
+                    <p style="margin-top: 10px;">Call 1-800-BUGLE-NY</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="newspaper-footer">
+            <p>THE DAILY BUGLE • 39TH STREET AND 2ND AVENUE, NEW YORK, NY 10016</p>
+            <p>© 2025 The Daily Bugle. All rights reserved. Published daily except Sundays and holidays.</p>
+            <p style="margin-top: 10px;">
+                PUBLISHER: J. Jonah Jameson | EDITOR: Robbie Robertson | CIRCULATION: 500,000+
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
