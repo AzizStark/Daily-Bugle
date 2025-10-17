@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Bugle - Page 5: Lifestyle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f1e8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            padding: 20px;
+        }
+
+        .newspaper-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        /* Header Section */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .newspaper-title-small {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        .page-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .page-date {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: right;
+        }
+
+        /* Section Headers */
+        .section-header {
+            background-color: #000;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 30px 0 20px 0;
+            border-left: 5px solid #666;
+        }
+
+        /* Two Column Layout */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Three Column Layout */
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .column {
+            border-right: 1px solid #ddd;
+            padding-right: 25px;
+        }
+
+        .column:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        /* Article Styles */
+        .article {
+            margin-bottom: 25px;
+        }
+
+        .article-headline {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .article-headline-large {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .article-byline {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .article-text::first-letter {
+            font-size: 42px;
+            font-weight: bold;
+            float: left;
+            line-height: 36px;
+            padding-right: 6px;
+            margin-top: 3px;
+        }
+
+        /* Image Styles */
+        .article-image {
+            width: 100%;
+            margin: 15px 0;
+            border: 2px solid #000;
+            padding: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .image-caption {
+            font-size: 10px;
+            font-style: italic;
+            margin-top: 6px;
+            text-align: center;
+            color: #444;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            border: 3px double #000;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .quote-box blockquote {
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .quote-box cite {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            font-size: 12px;
+            line-height: 1.8;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .info-box li:before {
+            content: "■";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Recipe Box */
+        .recipe-box {
+            background-color: #f9f9f9;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .recipe-box h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .recipe-box h5 {
+            font-size: 13px;
+            text-transform: uppercase;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
+
+        .recipe-box ul, .recipe-box ol {
+            font-size: 12px;
+            line-height: 1.6;
+            margin-left: 20px;
+        }
+
+        .recipe-box li {
+            margin-bottom: 5px;
+        }
+
+        /* Events Calendar */
+        .events-calendar {
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .events-calendar h4 {
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        .event-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #999;
+            font-size: 12px;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-date {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        .event-title {
+            font-weight: bold;
+            margin: 3px 0;
+        }
+
+        /* Rating Stars */
+        .rating {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        /* Footer */
+        .page-footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 3px solid #000;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .two-columns,
+            .three-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .column {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 20px;
+            }
+
+            .column:last-child {
+                border-bottom: none;
+            }
+
+            .newspaper-title-small {
+                font-size: 24px;
+            }
+
+            .page-number {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper-container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div>
+                <h1 class="newspaper-title-small">The Daily Bugle</h1>
+                <p class="page-date">Wednesday, January 8, 2025</p>
+            </div>
+            <div class="page-number">5</div>
+        </header>
+
+        <!-- Food & Dining Section -->
+        <div class="section-header">FOOD & DINING</div>
+
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h2 class="article-headline-large">NYC's Hidden Gem Restaurants</h2>
+                    <p class="article-byline">By Gloria Grant, Food Critic</p>
+                    <p class="article-text">
+                        New York City's culinary scene is legendary, but some of the best dining 
+                        experiences aren't found in Michelin-starred establishments. This week, 
+                        we explore five hidden gem restaurants that locals have been keeping secret 
+                        from tourists—until now.
+                    </p>
+                    <p class="article-text">
+                        First on our list is "Mama Rosa's" in Little Italy, a family-run trattoria 
+                        that's been serving authentic Sicilian cuisine for three generations. The 
+                        arancini here is simply divine, and the homemade pasta is worth the 
+                        inevitable wait for a table.
+                    </p>
+                    <p class="article-text">
+                        In Chinatown, "Golden Dragon Dumpling House" offers hand-pulled noodles 
+                        that rival anything you'll find in Shanghai. Chef Wong has perfected his 
+                        craft over 40 years, and it shows in every delicate fold of his soup 
+                        dumplings.
+                    </p>
+                    <p class="article-text">
+                        For those seeking vegetarian options, "Green Leaf Café" in the East Village 
+                        proves that plant-based dining can be both sophisticated and satisfying. 
+                        Their mushroom Wellington is a revelation, and the cashew cheese plate 
+                        will convert even the most devoted carnivore.
+                    </p>
+                </article>
+
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800" alt="Restaurant dining">
+                    <p class="image-caption">A bustling New York restaurant scene. File photo.</p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="recipe-box">
+                    <h4>Recipe of the Week</h4>
+                    <p style="text-align: center; font-weight: bold; margin: 10px 0;">New York Style Cheesecake</p>
+                    
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        <li>2 lbs cream cheese, softened</li>
+                        <li>1 cup sugar</li>
+                        <li>4 large eggs</li>
+                        <li>1 cup sour cream</li>
+                        <li>2 tsp vanilla extract</li>
+                        <li>Graham cracker crust</li>
+                    </ul>
+                    
+                    <h5>Instructions:</h5>
+                    <ol>
+                        <li>Preheat oven to 325°F</li>
+                        <li>Beat cream cheese until smooth</li>
+                        <li>Add sugar, mix well</li>
+                        <li>Add eggs one at a time</li>
+                        <li>Fold in sour cream and vanilla</li>
+                        <li>Pour into crust, bake 60 minutes</li>
+                        <li>Cool completely before serving</li>
+                    </ol>
+                    
+                    <p style="margin-top: 10px; font-style: italic; font-size: 11px;">
+                        Serves 12 • Prep time: 20 min • Cook time: 60 min
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h4>Restaurant Reviews</h4>
+                    <ul>
+                        <li><strong>Mama Rosa's:</strong> ★★★★★ (Italian)</li>
+                        <li><strong>Golden Dragon:</strong> ★★★★½ (Chinese)</li>
+                        <li><strong>Green Leaf Café:</strong> ★★★★ (Vegetarian)</li>
+                        <li><strong>The Steakhouse:</strong> ★★★★★ (American)</li>
+                        <li><strong>Sushi Palace:</strong> ★★★★ (Japanese)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Culture & Arts Section -->
+        <div class="section-header">CULTURE & ARTS</div>
+
+        <div class="three-columns">
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Met Gala Announces Theme</h3>
+                    <p class="article-byline">By Fashion Desk</p>
+                    <p class="article-text">
+                        The Metropolitan Museum of Art has announced this year's Met Gala theme: 
+                        "New York Renaissance: Art and Innovation." The event, scheduled for May 5th, 
+                        promises to celebrate the city's cultural evolution.
+                    </p>
+                    <p class="article-text">
+                        Celebrity attendees are expected to interpret the theme through fashion 
+                        that honors NYC's artistic heritage while embracing futuristic design 
+                        elements. Tickets start at $50,000.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Broadway Box Office Soars</h3>
+                    <p class="article-byline">By Betty Brant</p>
+                    <p class="article-text">
+                        Broadway ticket sales reached record highs this week, with several shows 
+                        completely sold out through March. "Hamilton" continues its dominance, 
+                        while newcomer "City Lights" is generating Oscar buzz for its innovative 
+                        staging.
+                    </p>
+                    <p class="article-text">
+                        Theater district restaurants report a 40% increase in reservations, 
+                        signaling a strong comeback for New York's entertainment sector.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">MoMA Unveils New Exhibit</h3>
+                    <p class="article-byline">By Art Correspondent</p>
+                    <p class="article-text">
+                        The Museum of Modern Art opens "Urban Visions: NYC Through the Lens" 
+                        this Friday, featuring photography spanning 100 years of city life. The 
+                        collection includes rare images from the 1920s alongside contemporary 
+                        street photography.
+                    </p>
+                    <p class="article-text">
+                        "This exhibit captures the soul of New York," said curator Dr. Sarah 
+                        Martinez. Admission is free on Fridays from 4-8 PM.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- Living Section -->
+        <div class="section-header">HOME & LIVING</div>
+
+        <div class="two-columns">
+            <div>
+                <article class="article">
+                    <h2 class="article-headline-large">Small Space, Big Style</h2>
+                    <p class="article-byline">By Interior Design Editor</p>
+                    <p class="article-text">
+                        Living in a New York City apartment often means making the most of limited 
+                        square footage. Interior designer Michelle Park shares her top tips for 
+                        maximizing small spaces without sacrificing style.
+                    </p>
+                    <p class="article-text">
+                        "Vertical storage is your best friend," Park explains. "Install floating 
+                        shelves, use tall bookcases, and don't forget about the space above your 
+                        doors. Every inch counts in a NYC apartment."
+                    </p>
+                    <p class="article-text">
+                        Multi-functional furniture is another key strategy. Ottoman storage, 
+                        Murphy beds, and expandable dining tables can transform a studio into 
+                        a surprisingly spacious home. Park recommends investing in quality pieces 
+                        that serve multiple purposes.
+                    </p>
+                    <p class="article-text">
+                        Light colors and mirrors can make rooms feel larger. "Paint walls in 
+                        soft whites or light grays," Park suggests. "Strategic mirror placement 
+                        reflects natural light and creates the illusion of more space."
+                    </p>
+                </article>
+
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=800" alt="Modern apartment interior">
+                    <p class="image-caption">A well-designed small NYC apartment showcases smart storage solutions.</p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="events-calendar">
+                    <h4>This Week's Events</h4>
+                    
+                    <div class="event-item">
+                        <div class="event-date">Thursday, Jan 9</div>
+                        <div class="event-title">Wine Tasting at Chelsea Market</div>
+                        <div>7:00 PM • $45 per person</div>
+                    </div>
+                    
+                    <div class="event-item">
+                        <div class="event-date">Friday, Jan 10</div>
+                        <div class="event-title">Jazz Night at Blue Note</div>
+                        <div>9:00 PM • $35-$75</div>
+                    </div>
+                    
+                    <div class="event-item">
+                        <div class="event-date">Saturday, Jan 11</div>
+                        <div class="event-title">Brooklyn Flea Market</div>
+                        <div>10:00 AM - 5:00 PM • Free entry</div>
+                    </div>
+                    
+                    <div class="event-item">
+                        <div class="event-date">Sunday, Jan 12</div>
+                        <div class="event-title">Brunch & Paint Workshop</div>
+                        <div>11:00 AM • $65 includes materials</div>
+                    </div>
+                    
+                    <div class="event-item">
+                        <div class="event-date">Monday, Jan 13</div>
+                        <div class="event-title">Cooking Class: Italian Basics</div>
+                        <div>6:30 PM • $85 per person</div>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    <blockquote>
+                        "Every inch counts in a NYC apartment. Think vertical, think multi-functional, 
+                        think smart."
+                    </blockquote>
+                    <cite>— Michelle Park, Interior Designer</cite>
+                </div>
+
+                <div class="info-box">
+                    <h4>Design Tips</h4>
+                    <ul>
+                        <li>Use vertical storage solutions</li>
+                        <li>Invest in multi-functional furniture</li>
+                        <li>Choose light colors for walls</li>
+                        <li>Add mirrors to reflect light</li>
+                        <li>Declutter regularly</li>
+                        <li>Use under-bed storage</li>
+                        <li>Install floating shelves</li>
+                        <li>Choose furniture with legs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wellness Section -->
+        <div class="section-header">HEALTH & WELLNESS</div>
+
+        <div class="three-columns">
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Winter Wellness Guide</h3>
+                    <p class="article-byline">By Health Editor</p>
+                    <p class="article-text">
+                        As temperatures drop, maintaining your health becomes crucial. Dr. James 
+                        Chen shares essential tips for staying healthy during New York's harsh 
+                        winter months.
+                    </p>
+                    <p class="article-text">
+                        "Hydration is just as important in winter as summer," Dr. Chen advises. 
+                        "Indoor heating can be dehydrating. Drink plenty of water and consider 
+                        using a humidifier."
+                    </p>
+                    <p class="article-text">
+                        Vitamin D supplementation is recommended, as shorter days mean less 
+                        sunlight exposure. Regular exercise, even indoors, helps maintain immune 
+                        function and mental health.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Yoga Studios to Try</h3>
+                    <p class="article-byline">By Fitness Correspondent</p>
+                    <p class="article-text">
+                        New yoga studios are opening across the city, offering everything from 
+                        hot yoga to aerial classes. "Zen Flow" in SoHo has become particularly 
+                        popular, offering rooftop sessions with city views.
+                    </p>
+                    <p class="article-text">
+                        "Breathe & Balance" in Brooklyn focuses on beginner-friendly classes, 
+                        while "Power Pose" in Midtown caters to advanced practitioners. Most 
+                        studios offer introductory packages for first-time visitors.
+                    </p>
+                </article>
+            </div>
+
+            <div class="column">
+                <article class="article">
+                    <h3 class="article-headline">Mental Health Matters</h3>
+                    <p class="article-byline">By Wellness Desk</p>
+                    <p class="article-text">
+                        January can be challenging for mental health. Psychologist Dr. Amanda 
+                        Torres recommends establishing routines, staying connected with friends, 
+                        and seeking professional help when needed.
+                    </p>
+                    <p class="article-text">
+                        "Don't underestimate the power of small daily rituals," Torres says. 
+                        "Morning walks, meditation, or even a good cup of coffee can provide 
+                        structure and comfort during difficult times."
+                    </p>
+                    <p class="article-text">
+                        Free mental health resources are available through NYC Well at 
+                        1-888-NYC-WELL.
+                    </p>
+                </article>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <p>THE DAILY BUGLE • PAGE 5 • WEDNESDAY, JANUARY 8, 2025</p>
+            <p style="margin-top: 5px;">For advertising inquiries: advertising@dailybugle.com | Newsroom: 555-BUGLE</p>
+        </footer>
+    </div>
+</body>
+</html>
